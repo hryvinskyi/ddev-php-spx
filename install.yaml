@@ -1,6 +1,4 @@
 name: php-spx
-
-pre_install_actions:
  
 project_files:
   - web-build/php-spx/download-loaders.sh
