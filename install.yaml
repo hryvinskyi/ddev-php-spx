@@ -3,6 +3,7 @@ name: php-spx
 pre_install_actions:
  
 project_files:
+  - web-build/php-spx/download-loaders.sh
   - web-build/php-spx/modify-dockerfile.sh
 
 post_install_actions:
