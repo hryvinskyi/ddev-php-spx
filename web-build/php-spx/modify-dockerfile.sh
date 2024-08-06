@@ -3,7 +3,6 @@
 
 add_directives() {
 	local FILE_PATH="$1"
-	local PHP_VERSIONS=("5.6" "7.0" "7.1" "7.2" "7.3" "7.4" "8.1" "8.2" "8.3" "8.4")
 
 	cat <<EOF >>"$FILE_PATH"
 # BEGIN PHP-SPX Install
@@ -19,11 +18,32 @@ RUN echo "extension=spx.so" > /etc/php/$DDEV_PHP_VERSION/mods-available/spx.ini
 EOF
 }
 
+add_phpini() {
+	local FILE_PATH="$1"
+
+	cat <<EOF >>"$FILE_PATH"
+
+extension=spx.so;
+zlib.output_compression = 0
+spx.http_enabled = 1
+spx.http_key = "dev"
+spx.http_ip_whitelist = "*"
+spx.data_dir = /var/www/spx_dumps
+
+EOF
+}
+
 # Define the file path
 DOCKERFILE="web-build/Dockerfile.php-spx"
+PHPINIFILE="php/spx-php.ini"
 
 if [ -e "$DOCKERFILE" ]; then
 	rm -f "$DOCKERFILE" >/dev/null
 fi
 
+if [ -e "$PHPINIFILE" ]; then
+	rm -f "$PHPINIFILE" >/dev/null
+fi
+
 add_directives "$DOCKERFILE"
+add_phpini "$PHPINIFILE"
