@@ -7,5 +7,9 @@ project_files:
 
 post_install_actions:
   - |
+    #ddev-description: Download Loaders
+    #
+    ./web-build/php-spx/download-loaders.sh
+  - |
     #ddev-description: Modify Dockerfile
     ./web-build/php-spx/modify-dockerfile.sh
