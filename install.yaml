@@ -3,4 +3,9 @@ name: php-spx
 pre_install_actions:
  
 project_files:
-  - docker-compose.php-spx.yaml
+  - web-build/php-spx/modify-dockerfile.sh
+
+post_install_actions:
+  - |
+    #ddev-description: Modify Dockerfile
+    ./web-build/php-spx/modify-dockerfile.sh
